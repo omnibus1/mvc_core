@@ -1,6 +1,18 @@
+
+
+
+@foreach(var user in ViewBag.data){
+    <h1>@user</h1>
+}
 <h1>
     BRAWO
 </h1>
-<form asp-action="DlaZalogowanych">
+<form asp-action="DodajUzytkownika">
+    <input name="login" id="login"  class="form-control" />
+    <input name="haslo" id="haslo"  class="form-control" />
+    <input type="submit" value="Dodaj" class="btn btn-primary" />
+</form>
+
+<form asp-action="Wyloguj">
     <input type="submit" value="wyloguj" class="btn btn-primary" />
 </form>
