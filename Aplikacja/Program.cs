@@ -1,4 +1,21 @@
+using Microsoft.Data.Sqlite;
+
 var builder = WebApplication.CreateBuilder(args);
+
+var connectionStringBuilder = new SqliteConnectionStringBuilder();
+connectionStringBuilder.DataSource = "./dane.db";
+var connection = new SqliteConnection(connectionStringBuilder.ConnectionString);
+connection.Open();
+SqliteCommand delTableCmd = connection.CreateCommand();
+delTableCmd.CommandText = "DROP TABLE IF EXISTS uzytkownicy";
+delTableCmd.ExecuteNonQuery();
+SqliteCommand createTableCmd = connection.CreateCommand();
+createTableCmd.CommandText ="CREATE TABLE uzytkownicy (\"login\" text not null PRIMARY KEY, \"haslo\" text not null);";
+createTableCmd.ExecuteNonQuery();
+SqliteCommand insertCmd = connection.CreateCommand();
+insertCmd.CommandText="INSERT INTO uzytkownicy values"+"(\"admin\",\"admin\"),"+"(\"kasia\",\"123\");";
+insertCmd.ExecuteNonQuery();
+
 
 builder.Services.AddRazorPages();
 
@@ -29,6 +46,8 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+app.UseSession();
 
 app.UseAuthorization();
 

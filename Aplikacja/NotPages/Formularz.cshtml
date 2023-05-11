@@ -1,0 +1,19 @@
+@page
+@using RazorPagesIntro.Pages
+@model Formularz
+
+@ViewData["sentence"]
+<form method="get">
+<input id="login" name="user-login" class="form-control" />
+<input id="haslo" name="user-haslo" class="form-control" />
+<input type="submit" value="przesij" class="btn btn-primary" />
+</form>          
+
+<h2>XXXCześć! To wiadomość wygenerowana przez model strony</h2>
+<p>
+    @Model.loginMessage
+    @Model.hasloMessage
+</p>
+<h1>
+    @Model.poprawnoscLogowania
+</h1>

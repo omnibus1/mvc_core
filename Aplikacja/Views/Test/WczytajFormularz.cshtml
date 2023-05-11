@@ -1,0 +1,13 @@
+@ViewData["dane"]
+
+@if (Context.Session.GetString("zalogowano") != null && Context.Session.GetString("zalogowano") == "True")
+{
+    <h1>jestes zalogowany</h1>
+}
+
+<form asp-action="WczytajFormularz">
+    <input name="dane" id="dane"  class="form-control" />
+    @* <input name="login" id="login"  class="form-control" /> *@
+    <input name="haslo" id="haslo"  class="form-control" />
+    <input type="submit" value="WczytajFormularz" class="btn btn-primary" />
+</form>

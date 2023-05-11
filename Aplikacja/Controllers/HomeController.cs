@@ -13,10 +13,7 @@ public class HomeController : Controller
         _logger = logger;
     }
 
-    public IActionResult Index()
-    {
-        return View();
-    }
+
 
     public IActionResult Privacy()
     {
@@ -28,13 +25,13 @@ public class HomeController : Controller
     {
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
-    public String LiczbaOdwiedzin(int liczbaPowtorzen,
-      String napis){
+    public String LiczbaOdwiedzin(int liczbaPowtorzen,String napis){
       String napisPomoc = "";
       for (int a = 0; a < liczbaPowtorzen; a++)
       {
       napisPomoc += napis + "\n";
       }
       return napisPomoc;
-}
+    }
+
 }
