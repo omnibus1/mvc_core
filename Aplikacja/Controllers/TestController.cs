@@ -7,6 +7,8 @@ using System.Collections;
 public class TestController : Controller
 {
 
+    public ArrayList users=new ArrayList();
+
     
     public SqliteConnection connectToDB(){
         var connectionStringBuilder = new SqliteConnectionStringBuilder();
@@ -16,14 +18,7 @@ public class TestController : Controller
         return connection;
     }
 
-    public ArrayList users=new ArrayList();
-
-
     public string ExecuteSelectQuery(string query){
-        var connectionStringBuilder = new SqliteConnectionStringBuilder();
-        connectionStringBuilder.DataSource = "F:/code/dotnet/mvc_core/Aplikacja/dane.db";
-        var connection = new SqliteConnection(connectionStringBuilder.ConnectionString);
-        connection.Open();
         SqliteCommand selectCmd = connectToDB().CreateCommand();
         selectCmd.CommandText = query;
         string ?resp= (string?)selectCmd.ExecuteScalar();
@@ -36,12 +31,7 @@ public class TestController : Controller
     }
 
     public string ExecuteInsertQuery(string query){
-
-        var connectionStringBuilder = new SqliteConnectionStringBuilder();
-        connectionStringBuilder.DataSource = "F:/code/dotnet/mvc_core/Aplikacja/dane.db";
-        var connection = new SqliteConnection(connectionStringBuilder.ConnectionString);
-        connection.Open();
-        SqliteCommand insertCmd = connection.CreateCommand();
+        SqliteCommand insertCmd = connectToDB().CreateCommand();
         insertCmd.CommandText=query;
         insertCmd.ExecuteNonQuery();
 
@@ -49,12 +39,8 @@ public class TestController : Controller
     }
 
 
-    public string ExecuteSelectQueryOnAll(string query){
-        var connectionStringBuilder = new SqliteConnectionStringBuilder();
-        connectionStringBuilder.DataSource = "F:/code/dotnet/mvc_core/Aplikacja/dane.db";
-        var connection = new SqliteConnection(connectionStringBuilder.ConnectionString);
-        connection.Open();
-        SqliteCommand selectCmd = connection.CreateCommand();
+    public void ExecuteSelectQueryOnAll(string query){
+        SqliteCommand selectCmd = connectToDB().CreateCommand();
         selectCmd.CommandText = query;
         using (SqliteDataReader reader = selectCmd.ExecuteReader()){
             bool firstRow=true;
@@ -81,7 +67,6 @@ public class TestController : Controller
                 }
         }
         ViewBag.data=users;
-        return "";
     }
 
     public IActionResult WczytajFormularz()
@@ -104,13 +89,11 @@ public class TestController : Controller
     [HttpPost] 
     public IActionResult WczytajFormularz(IFormCollection form)
     {
-        string login = form["login"].ToString();
-        string haslo=form["haslo"].ToString();
-        Console.WriteLine("haslo: "+haslo);
+        string login = form["login"].ToString().Trim();
+        string haslo=form["haslo"].ToString().Trim();
         string response=ExecuteSelectQuery($"select login,haslo from uzytkownicy where login=\'{login}\' and haslo=\'{haslo}\'");
         if(response!="none"){
             HttpContext.Session.SetString("zalogowano", "True");
-            // string url=string.Format("DlaZalogowanych");
             return RedirectToAction("DlaZalogowanych");
         }
         ViewData["dane"] += "Sproboj ponownie";
@@ -127,8 +110,8 @@ public class TestController : Controller
     [HttpPost] 
     public IActionResult DodajUzytkownika(IFormCollection form)
     {
-        string login=form["login"].ToString();
-        string haslo=form["haslo"].ToString();
+        string login=form["login"].ToString().Trim();
+        string haslo=form["haslo"].ToString().Trim();
         ExecuteInsertQuery($"insert into uzytkownicy values(\'{login}\',\'{haslo}\')");
         return RedirectToAction("DlaZalogowanych");
     }
