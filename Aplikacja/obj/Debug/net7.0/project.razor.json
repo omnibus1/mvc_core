@@ -18665,6 +18665,16 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "f:\\code\\dotnet\\mvc_core\\Aplikacja\\Views\\Test\\Index.cshtml",
+      "TargetPath": "Views\\Test\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "f:\\code\\dotnet\\mvc_core\\Aplikacja\\Views\\Home\\Random.cshtml",
+      "TargetPath": "Views\\Home\\Random.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "f:\\code\\dotnet\\mvc_core\\Aplikacja\\Views\\Home\\Privacy.cshtml",
       "TargetPath": "Views\\Home\\Privacy.cshtml",
       "FileKind": "mvc"
@@ -18672,6 +18682,11 @@
     {
       "FilePath": "f:\\code\\dotnet\\mvc_core\\Aplikacja\\Views\\Home\\Index.cshtml",
       "TargetPath": "Views\\Home\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "f:\\code\\dotnet\\mvc_core\\Aplikacja\\Pages\\Index.cshtml",
+      "TargetPath": "Pages\\Index.cshtml",
       "FileKind": "mvc"
     },
     {
